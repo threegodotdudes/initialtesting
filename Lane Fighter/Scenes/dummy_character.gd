@@ -50,7 +50,15 @@ func _ready():
 	turn_node = get_node("turn")
 	anim_player = get_node("turn/AnimationPlayer")
 	set_fixed_process(true)
+	set_process_input(true)
 	
+func _input(event):
+	if event.is_action("boost") && event.is_pressed() && !event.is_echo():
+		character_speed = 1750
+	if event.is_action_released("boost"):
+		character_speed = 700
+	pass
+
 func _fixed_process(delta):
 	state_prev = state_current
 	state_current = state_next
@@ -62,7 +70,7 @@ func _fixed_process(delta):
 	jump_bttn = Input.is_action_pressed("ui_up")
 	light_attack_bttn = Input.is_action_pressed("light_attack")
 	heavy_attack_bttn = Input.is_action_pressed("heavy_attack")
-	taunt_bttn = Input.is_action_pressed("taunt_bttn")
+	taunt_bttn = Input.is_action_pressed("taunt")
 	
 	if state_current == "ground":
 		ground_state(delta)
