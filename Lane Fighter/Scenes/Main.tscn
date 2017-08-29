@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/dummy_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/dummy_item.tscn" type="PackedScene" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Textures/jungle_1.tex" type="Texture" id=5]
 
 [sub_resource type="SegmentShape2D" id=1]
 
@@ -391,5 +392,40 @@ visibility/behind_parent = true
 transform/pos = Vector2( 0, -10 )
 transform/scale = Vector2( 1, 1.40625 )
 texture = ExtResource( 4 )
+
+[node name="background" type="ParallaxBackground" parent="."]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="background"]
+
+editor/display_folded = true
+motion/scale = Vector2( 1, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 2484, 0 )
+
+[node name="TextureFrame" type="TextureFrame" parent="background/ParallaxLayer"]
+
+rect/scale = Vector2( 1.5, 1.5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -1261.0
+margin/top = -903.0
+margin/right = 1223.0
+margin/bottom = 297.0
+texture = ExtResource( 5 )
+stretch_mode = 0
 
 
