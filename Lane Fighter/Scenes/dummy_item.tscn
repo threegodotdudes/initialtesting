@@ -3,12 +3,12 @@
 [ext_resource path="res://Scenes/dummy_item.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 50.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 resource/name = "collect"
 length = 1.0
@@ -37,9 +37,8 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=3]
 
-resource/name = "hover"
 length = 1.0
 loop = true
 step = 0.1
@@ -75,7 +74,7 @@ texture = ExtResource( 2 )
 [node name="Area2D" type="Area2D" parent="Sprite"]
 
 input/pickable = true
-shapes/0/shape = SubResource( 2 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -85,7 +84,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
 
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
@@ -94,8 +93,8 @@ _update_shape_index = 0
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/collect = SubResource( 3 )
-anims/hover = SubResource( 1 )
+anims/collect = SubResource( 2 )
+anims/hover = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

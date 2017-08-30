@@ -4,7 +4,7 @@ var character_speed = 700
 var character_acceleration = 5
 var character_air_acceleration = 2
 var jump_force = 1000
-var jump_ability = 2
+var jump_ability = 10
 var raycast_down = null
 var turn_node = null
 var anim_player = null
@@ -53,11 +53,14 @@ func _ready():
 	set_process_input(true)
 	
 func _input(event):
-	if event.is_action("boost") && event.is_pressed() && !event.is_echo():
-		character_speed = 1750
-	if event.is_action_released("boost"):
-		character_speed = 700
-	pass
+	if InputEvent.KEY and !event.is_echo():
+		if event.is_action_pressed("ui_up") and jumping > 0:
+			set_axis_velocity(Vector2(0,-jump_force))
+			jumping -= 1
+		if event.is_action_pressed("boost"):
+			character_speed = 1750
+		if event.is_action_released("boost"):
+			character_speed = 700
 
 func _fixed_process(delta):
 	state_prev = state_current
@@ -67,7 +70,6 @@ func _fixed_process(delta):
 	set_rot(0)
 	left_bttn = Input.is_action_pressed("ui_left")
 	right_bttn = Input.is_action_pressed("ui_right")
-	jump_bttn = Input.is_action_pressed("ui_up")
 	light_attack_bttn = Input.is_action_pressed("light_attack")
 	heavy_attack_bttn = Input.is_action_pressed("heavy_attack")
 	taunt_bttn = Input.is_action_pressed("taunt")
@@ -82,14 +84,13 @@ func _fixed_process(delta):
 		anim_player.play(anim_current, anim_blend, anim_speed)
 	
 func ground_state(delta):
-	jumping = jump_ability
-	if left_bttn and right_bttn != true and light_attack_bttn != true:
+	if left_bttn and right_bttn != true and light_attack_bttn != true and heavy_attack_bttn != true:
 		move(-character_speed, character_acceleration, delta)
 		orientation_next = "left"
 		anim_current = "running"
 		anim_blend = 0.2
 		anim_speed = 2
-	elif right_bttn and left_bttn != true and light_attack_bttn != true:
+	elif right_bttn and left_bttn != true and light_attack_bttn != true and heavy_attack_bttn != true:
 		move( character_speed, character_acceleration, delta)
 		orientation_next = "right"
 		anim_current = "running"
@@ -117,11 +118,7 @@ func ground_state(delta):
 		anim_speed = 0.5
 	turn_behaviour()
 	
-	if is_on_ground():
-		if jump_bttn:
-			set_axis_velocity(Vector2(0, -jump_force))
-			jumping -= 1
-	else:
+	if !is_on_ground():
 		state_next = "air"
 	
 func air_state(delta):
@@ -135,12 +132,9 @@ func air_state(delta):
 		move(0, character_air_acceleration, delta)
 	turn_behaviour()
 	
-	if jump_bttn and jumping > 0:
-		set_axis_velocity(Vector2(0,-jump_force))
-		jumping -= 1
-	
 	if is_on_ground():
 		state_next = "ground"
+		jumping = jump_ability
 		
 	if get_linear_velocity().y < 0:
 		anim_current = "jump"

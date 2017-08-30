@@ -1125,6 +1125,7 @@ __meta__ = {
 
 [node name="turn" type="Node2D" parent="."]
 
+editor/display_folded = true
 transform/scale = Vector2( 0.2, 0.2 )
 __meta__ = {
 "_edit_lock_": true
@@ -1140,8 +1141,8 @@ __meta__ = {
 
 [node name="Right_arm" type="Sprite" parent="turn/Body"]
 
-transform/pos = Vector2( 87.8548, -58.9332 )
-transform/rot = -1.9842
+transform/pos = Vector2( 97.3115, -66.4985 )
+transform/rot = -10.0779
 z/z = -1
 texture = ExtResource( 3 )
 offset = Vector2( 48.8556, 63.1225 )
@@ -1155,8 +1156,8 @@ offset = Vector2( -1.48157, 45.9343 )
 
 [node name="Head" type="Sprite" parent="turn/Body"]
 
-transform/pos = Vector2( -0.348619, -110.244 )
-transform/rot = -0.148814
+transform/pos = Vector2( -1.22365, -116.369 )
+transform/rot = -0.0973148
 z/z = 1
 texture = ExtResource( 5 )
 offset = Vector2( 9.5679, -65.79 )
@@ -1170,8 +1171,8 @@ offset = Vector2( 3.42938, 39.7955 )
 
 [node name="Left_arm" type="Sprite" parent="turn/Body"]
 
-transform/pos = Vector2( -80.542, -64.6528 )
-transform/rot = 21.7784
+transform/pos = Vector2( -99.9281, -71.2725 )
+transform/rot = 10.7062
 z/z = 1
 texture = ExtResource( 7 )
 offset = Vector2( -28.4918, 70.489 )
@@ -1179,8 +1180,8 @@ offset = Vector2( -28.4918, 70.489 )
 [node name="Weapon" type="Sprite" parent="turn/Body"]
 
 editor/display_folded = true
-transform/pos = Vector2( 267.288, 36.6479 )
-transform/rot = -23.6
+transform/pos = Vector2( 222.368, 40.4306 )
+transform/rot = -25.3686
 texture = ExtResource( 8 )
 
 [node name="Hit_Area" type="Area2D" parent="turn/Body/Weapon"]
