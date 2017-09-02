@@ -124,7 +124,7 @@ tracks/9/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 0,
-"values": [ -116.361 ]
+"values": [ 243.6 ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("Body/Right_leg:transform/pos")
@@ -483,7 +483,7 @@ tracks/1/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 0,
-"values": [ -277.147 ]
+"values": [ 82.9 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Body:transform/pos")
@@ -563,7 +563,7 @@ tracks/9/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 0,
-"values": [ 465.885 ]
+"values": [ 105.9 ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("Body/Right_leg:transform/pos")
@@ -1125,7 +1125,6 @@ __meta__ = {
 
 [node name="turn" type="Node2D" parent="."]
 
-editor/display_folded = true
 transform/scale = Vector2( 0.2, 0.2 )
 __meta__ = {
 "_edit_lock_": true
