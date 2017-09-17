@@ -3,7 +3,7 @@ extends RigidBody2D
 var character_speed = 700
 var character_acceleration = 5
 var character_air_acceleration = 2
-var jump_force = 1000
+var jump_force = 700
 var jump_ability = 10
 var raycast_down = null
 var turn_node = null
@@ -11,6 +11,7 @@ var anim_player = null
 var anim_blend = 0.2
 var anim_speed = 1
 var jumping = jump_ability
+var light_attack_force = 700
 	
 var left_bttn
 var right_bttn
@@ -61,6 +62,12 @@ func _input(event):
 			character_speed = 1750
 		if event.is_action_released("boost"):
 			character_speed = 700
+		if event.is_action_pressed("light_attack") and state_current != "air":
+			anim_player.play("light_attack", 0, 2)
+		if event.is_action_pressed("heavy_attack") and state_current != "air":
+			anim_player.play("heavy_attack", 0, 3)
+		if event.is_action_pressed("taunt") and state_current != "air":
+			anim_player.play("taunt")
 
 func _fixed_process(delta):
 	state_prev = state_current
@@ -84,33 +91,18 @@ func _fixed_process(delta):
 		anim_player.play(anim_current, anim_blend, anim_speed)
 	
 func ground_state(delta):
-	if left_bttn and right_bttn != true and light_attack_bttn != true and heavy_attack_bttn != true:
+	if left_bttn and right_bttn != true:
 		move(-character_speed, character_acceleration, delta)
 		orientation_next = "left"
 		anim_current = "running"
 		anim_blend = 0.2
 		anim_speed = 2
-	elif right_bttn and left_bttn != true and light_attack_bttn != true and heavy_attack_bttn != true:
+	elif right_bttn and left_bttn != true:
 		move( character_speed, character_acceleration, delta)
 		orientation_next = "right"
 		anim_current = "running"
 		anim_blend = 0.2
 		anim_speed = 2
-	elif light_attack_bttn:
-		move(0, character_acceleration, delta)
-		anim_current = "light_attack"
-		anim_blend = 0.2
-		anim_speed = 1
-	elif heavy_attack_bttn:
-		move(0, character_acceleration, delta)
-		anim_current = "heavy_attack"
-		anim_blend = 0.2
-		anim_speed = 1
-	elif taunt_bttn:
-		move(0, character_acceleration, delta)
-		anim_current = "taunt"
-		anim_blend = 0.2
-		anim_speed = 1
 	else:
 		move(0, character_acceleration, delta)
 		anim_current = "idle"

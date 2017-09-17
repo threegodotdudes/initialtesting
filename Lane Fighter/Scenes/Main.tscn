@@ -1,17 +1,18 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/dummy_character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/dummy_item.tscn" type="PackedScene" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Textures/stone_platform.tex" type="Texture" id=4]
 [ext_resource path="res://Textures/mountains_green_1.tex" type="Texture" id=5]
-[ext_resource path="res://gui.gd" type="Script" id=6]
+[ext_resource path="res://Textures/woods_1.tex" type="Texture" id=6]
+[ext_resource path="res://gui.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/ball.tscn" type="PackedScene" id=8]
 
-[sub_resource type="SegmentShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-a = Vector2( -20, 10 )
-b = Vector2( 45.0879, 10 )
+extents = Vector2( 32, 4 )
 
 [node name="Main" type="Node2D"]
 
@@ -19,18 +20,20 @@ script/script = ExtResource( 1 )
 
 [node name="dummy" parent="." instance=ExtResource( 2 )]
 
+editor/display_folded = true
 transform/pos = Vector2( 100, 550 )
+mode = 2
 friction = 0.0
 bounce = 0.0
 gravity_scale = 20.0
 
 [node name="Camera2D" type="Camera2D" parent="dummy"]
 
-offset = Vector2( 0, -350 )
+offset = Vector2( 0, -50 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 0.75, 0.75 )
 limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
@@ -53,54 +56,6 @@ transform/scale = Vector2( 0.5, 0.5 )
 
 transform/pos = Vector2( 1840, 960 )
 
-[node name="dummy_item1" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 2240, 900 )
-
-[node name="dummy_item2" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 2620, 780 )
-
-[node name="dummy_item3" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 3020, 660 )
-
-[node name="dummy_item4" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 1340, -160 )
-
-[node name="dummy_item5" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 4540, -740 )
-
-[node name="dummy_item6" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 5940, -740 )
-
-[node name="dummy_item7" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 7520, -740 )
-
-[node name="dummy_item8" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 8920, -740 )
-
-[node name="dummy_item9" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 10740, -720 )
-
-[node name="dummy_item10" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 13020, -740 )
-
-[node name="dummy_item11" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 15420, -780 )
-
-[node name="dummy_item12" parent="coins" instance=ExtResource( 3 )]
-
-transform/pos = Vector2( 18640, -820 )
-
 [node name="Earth" type="Node2D" parent="."]
 
 editor/display_folded = true
@@ -109,12 +64,12 @@ editor/display_folded = true
 
 editor/display_folded = true
 visibility/behind_parent = true
-transform/pos = Vector2( -114.499, 570 )
-transform/scale = Vector2( 35.4844, 1 )
+transform/pos = Vector2( 245.305, 584.118 )
+transform/scale = Vector2( 23.4608, 7.89973 )
 z/z = -2
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -125,7 +80,6 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D"]
 
-transform/pos = Vector2( -11.8982, -30 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -133,181 +87,20 @@ _update_shape_index = 0
 [node name="Sprite" type="Sprite" parent="Earth/StaticBody2D"]
 
 visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
-texture = ExtResource( 4 )
-
-[node name="StaticBody2D1" type="StaticBody2D" parent="Earth"]
-
-editor/display_folded = true
-visibility/behind_parent = true
-transform/pos = Vector2( 6044.5, 280 )
-transform/scale = Vector2( 127.672, 1 )
-z/z = -2
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D1"]
-
-transform/pos = Vector2( -11.8982, -30 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D1"]
-
-visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
-texture = ExtResource( 4 )
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Earth"]
-
-editor/display_folded = true
-visibility/behind_parent = true
-transform/pos = Vector2( 1470, 430 )
-transform/rot = 17.0717
-transform/scale = Vector2( 15.9688, 1 )
-z/z = -2
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D2"]
-
-transform/pos = Vector2( -11.8982, -30 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D2"]
-
-visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
-texture = ExtResource( 4 )
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Earth"]
-
-editor/display_folded = true
-visibility/behind_parent = true
-transform/pos = Vector2( 689.499, 20 )
-transform/scale = Vector2( 21.8906, 1 )
-z/z = -2
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D3"]
-
-transform/pos = Vector2( -11.8982, -30 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D3"]
-
-visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
-texture = ExtResource( 4 )
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Earth"]
-
-editor/display_folded = true
-visibility/behind_parent = true
-transform/pos = Vector2( 3379.75, -270 )
-transform/scale = Vector2( 44.0703, 1 )
-z/z = -2
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D4"]
-
-transform/pos = Vector2( -11.8982, -30 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D4"]
-
-visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
-texture = ExtResource( 4 )
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="Earth"]
-
-editor/display_folded = true
-visibility/behind_parent = true
-transform/pos = Vector2( 5379.88, -270 )
-transform/scale = Vector2( 6.2539, 1 )
-z/z = -2
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D5"]
-
-transform/pos = Vector2( -11.8982, -30 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D5"]
-
-visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
+transform/scale = Vector2( 0.026, 0.013 )
 texture = ExtResource( 4 )
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="Earth"]
 
 editor/display_folded = true
 visibility/behind_parent = true
-transform/pos = Vector2( 6510, -280 )
-transform/scale = Vector2( 6.2539, 1 )
+transform/pos = Vector2( -451.523, -113.461 )
+transform/rot = -90.0
+transform/scale = Vector2( 23.4608, 7.89973 )
 z/z = -2
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -318,7 +111,6 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D6"]
 
-transform/pos = Vector2( -11.8982, -30 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -326,20 +118,174 @@ _update_shape_index = 0
 [node name="Sprite" type="Sprite" parent="Earth/StaticBody2D6"]
 
 visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
+transform/scale = Vector2( 0.026, 0.013 )
 texture = ExtResource( 4 )
+
+[node name="StaticBody2D1" type="StaticBody2D" parent="Earth"]
+
+visibility/behind_parent = true
+transform/pos = Vector2( 1736.54, 584.118 )
+transform/scale = Vector2( 23.4608, 7.89973 )
+z/z = -2
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D1"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D1"]
+
+visibility/behind_parent = true
+transform/scale = Vector2( 0.026, 0.013 )
+texture = ExtResource( 4 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Earth"]
+
+visibility/behind_parent = true
+transform/pos = Vector2( 3195.22, 369.025 )
+transform/rot = 16.5919
+transform/scale = Vector2( 23.4608, 7.89973 )
+z/z = -2
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, -7.45058e-09, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D2"]
+
+visibility/behind_parent = true
+transform/scale = Vector2( 0.026, 0.013 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D2"]
+
+transform/rot = -4.26887e-07
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Earth"]
+
+editor/display_folded = true
+visibility/behind_parent = true
+transform/pos = Vector2( 4656.37, 155.988 )
+transform/scale = Vector2( 23.4608, 7.89973 )
+z/z = -2
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D3"]
+
+visibility/behind_parent = true
+transform/pos = Vector2( -0.0255432, 1.90735e-06 )
+transform/scale = Vector2( 0.026, 0.013 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D3"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Earth"]
+
+editor/display_folded = true
+visibility/behind_parent = true
+transform/pos = Vector2( 7529.03, 707.91 )
+transform/scale = Vector2( 23.4608, 7.89973 )
+z/z = -2
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D5"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D5"]
+
+visibility/behind_parent = true
+transform/pos = Vector2( -0.381897, 0.721741 )
+transform/scale = Vector2( 0.026, 0.013 )
+texture = ExtResource( 4 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Earth"]
+
+editor/display_folded = true
+visibility/behind_parent = true
+transform/pos = Vector2( 6093.35, 430.439 )
+transform/rot = -21.6245
+transform/scale = Vector2( 23.4608, 7.89973 )
+z/z = -2
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, -7.45058e-09, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D4"]
+
+visibility/behind_parent = true
+transform/scale = Vector2( 0.026, 0.013 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D4"]
+
+transform/rot = -4.26887e-07
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="Earth"]
 
 editor/display_folded = true
 visibility/behind_parent = true
-transform/pos = Vector2( 7710, -300 )
-transform/scale = Vector2( 6.2539, 1 )
+transform/pos = Vector2( 8216.64, 8.46271 )
+transform/rot = 90.0
+transform/scale = Vector2( 23.4608, 7.89973 )
 z/z = -2
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -350,7 +296,6 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D7"]
 
-transform/pos = Vector2( -11.8982, -30 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -358,44 +303,12 @@ _update_shape_index = 0
 [node name="Sprite" type="Sprite" parent="Earth/StaticBody2D7"]
 
 visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
-texture = ExtResource( 4 )
-
-[node name="StaticBody2D8" type="StaticBody2D" parent="Earth"]
-
-editor/display_folded = true
-visibility/behind_parent = true
-transform/pos = Vector2( 9330, -320 )
-transform/scale = Vector2( 6.2539, 1 )
-z/z = -2
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.8982, -30 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Earth/StaticBody2D8"]
-
-transform/pos = Vector2( -11.8982, -30 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[node name="Sprite" type="Sprite" parent="Earth/StaticBody2D8"]
-
-visibility/behind_parent = true
-transform/pos = Vector2( 0, -10 )
-transform/scale = Vector2( 1, 1.40625 )
+transform/scale = Vector2( 0.026, 0.013 )
 texture = ExtResource( 4 )
 
 [node name="background" type="ParallaxBackground" parent="."]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -421,13 +334,34 @@ margin/bottom = 4320.0
 texture = ExtResource( 5 )
 stretch_mode = 0
 
+[node name="ParallaxLayer" type="ParallaxLayer" parent="background"]
+
+motion/scale = Vector2( 1, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 1242, 0 )
+
+[node name="TextureFrame" type="TextureFrame" parent="background/ParallaxLayer"]
+
+rect/scale = Vector2( 0.5, 2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = -1200.0
+margin/right = 2484.0
+margin/bottom = 0.0
+texture = ExtResource( 6 )
+stretch_mode = 3
+
 [node name="gui" type="CanvasLayer" parent="."]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
-script/script = ExtResource( 6 )
+script/script = ExtResource( 7 )
 
 [node name="jumps_left" type="Label" parent="gui"]
 
@@ -471,5 +405,11 @@ margin/bottom = 14.0
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="ball" parent="." instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 689.56, -121.14 )
+bounce = 0.4
+gravity_scale = 20.0
 
 
