@@ -54,7 +54,7 @@ func _ready():
 	set_process_input(true)
 	
 func _input(event):
-	if InputEvent.KEY and !event.is_echo():
+	if event.is_pressed() and !event.is_echo():
 		if event.is_action_pressed("ui_up") and jumping > 0:
 			set_axis_velocity(Vector2(0,-jump_force))
 			jumping -= 1
@@ -63,11 +63,27 @@ func _input(event):
 		if event.is_action_released("boost"):
 			character_speed = 700
 		if event.is_action_pressed("light_attack") and state_current != "air":
-			anim_player.play("light_attack", 0, 2)
+			if anim_player.get_current_animation() != "heavy_attack":
+				anim_player.play("light_attack", 0, 2)
 		if event.is_action_pressed("heavy_attack") and state_current != "air":
-			anim_player.play("heavy_attack", 0, 3)
+			if anim_player.get_current_animation() != "light_attack":
+				anim_player.play("heavy_attack", 0, 3)
 		if event.is_action_pressed("taunt") and state_current != "air":
 			anim_player.play("taunt")
+		
+		if !Input.is_action_pressed("ui_right") and !Input.is_action_pressed("ui_left"):
+			anim_player.set_default_blend_time(0.2)
+			anim_player.set_speed(0.5)
+			anim_player.queue("idle")
+		elif  Input.is_action_pressed("ui_right"):
+			anim_player.set_default_blend_time(0.2)
+			anim_player.set_speed(0.5)
+			anim_player.queue("running")
+		elif Input.is_action_pressed("ui_left"):
+			anim_player.set_default_blend_time(0.2)
+			anim_player.set_speed(0.5)
+			anim_player.queue("running")
+			
 
 func _fixed_process(delta):
 	state_prev = state_current
@@ -75,6 +91,7 @@ func _fixed_process(delta):
 	orientation_prev = orientation_current
 	orientation_current = orientation_next
 	set_rot(0)
+	
 	left_bttn = Input.is_action_pressed("ui_left")
 	right_bttn = Input.is_action_pressed("ui_right")
 	light_attack_bttn = Input.is_action_pressed("light_attack")
@@ -86,6 +103,7 @@ func _fixed_process(delta):
 	elif state_current == "air":
 		air_state(delta)
 	
+	# If animation changed, play that animation
 	if anim_current != anim_next:
 		anim_next = anim_current
 		anim_player.play(anim_current, anim_blend, anim_speed)
