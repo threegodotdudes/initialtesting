@@ -66,6 +66,7 @@ tracks/1/keys = {
 [node name="dummy_item" type="Node2D"]
 
 script/script = ExtResource( 1 )
+power_up_amount = 1.1
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -81,6 +82,8 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision/layers = 0
+collision/mask = 1025
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
 

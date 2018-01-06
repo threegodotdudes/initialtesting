@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=1]
+[gd_scene load_steps=19 format=1]
 
 [ext_resource path="res://Scenes/dummy_character.gd" type="Script" id=1]
 [ext_resource path="res://Textures/female_2d_scirbble_experiment_2.tex" type="Texture" id=2]
@@ -15,7 +15,7 @@ custom_solver_bias = 0.0
 radius = 15.0
 height = 100.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 
 resource/name = "base"
 length = 1.0
@@ -202,7 +202,7 @@ tracks/17/keys = {
 "values": [ -0.621101 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 
 length = 1.0
 loop = false
@@ -388,7 +388,7 @@ tracks/17/keys = {
 "values": [ -98.9823 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 
 length = 1.0
 loop = false
@@ -574,7 +574,7 @@ tracks/17/keys = {
 "values": [ -11.5027, -11.5027, -11.5027, -11.5027 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 
 length = 1.0
 loop = true
@@ -760,7 +760,7 @@ tracks/17/keys = {
 "values": [ -11.5027, -11.5027 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 
 length = 1.0
 loop = false
@@ -946,7 +946,7 @@ tracks/17/keys = {
 "values": [ -76.1299 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 
 length = 0.5
 loop = false
@@ -1141,8 +1141,23 @@ tracks/18/keys = {
 "update": 0,
 "values": [ -11.5027, -75.2194, -11.5027, -11.5027 ]
 }
+tracks/19/type = "method"
+tracks/19/path = NodePath("..")
+tracks/19/interp = 1
+tracks/19/imported = false
+tracks/19/keys = {
+"times": FloatArray( 0, 0.3 ),
+"transitions": FloatArray( 1, 1 ),
+"values": [ {
+"args": [ 0.2 ],
+"method": "waiting_function"
+}, {
+"args": [  ],
+"method": "hit_check"
+} ]
+}
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 
 length = 1.0
 loop = true
@@ -1328,7 +1343,7 @@ tracks/17/keys = {
 "values": [ -0.705308, -63.4513, -100.706, -27.3193 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 
 length = 1.0
 loop = false
@@ -1534,17 +1549,22 @@ tracks/19/keys = {
 "values": [ -11.5027, -93.6962, -109.569, -137.659, -79.5267, -21.3947 ]
 }
 
+[sub_resource type="RectangleShape2D" id=10]
+
+custom_solver_bias = 0.0
+extents = Vector2( 200, 200 )
+
 [node name="dummy" type="RigidBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 2.98023e-08, -2.98023e-08, 1, -0.676351, -58.0747 )
+shapes/0/transform = Matrix32( 1, 2.98024e-08, -2.98024e-08, 1, -0.676351, -58.0747 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision/layers = 1024
+collision/mask = 3
 mode = 0
 mass = 1.0
-friction = 1.0
+friction = 0.0
 bounce = 0.5
 gravity_scale = 5.0
 custom_integrator = false
@@ -1579,7 +1599,7 @@ __meta__ = {
 transform/pos = Vector2( -0.393494, -29.5763 )
 enabled = true
 cast_to = Vector2( 0, 50 )
-layer_mask = 1
+layer_mask = 3
 type_mask = 15
 __meta__ = {
 "_edit_lock_": true
@@ -1587,6 +1607,7 @@ __meta__ = {
 
 [node name="turn" type="Node2D" parent="."]
 
+transform/pos = Vector2( -0.663391, 0 )
 transform/scale = Vector2( 0.2, 0.2 )
 
 [node name="Body_parts" type="Sprite" parent="turn"]
@@ -1633,6 +1654,7 @@ offset = Vector2( -46.2078, -209.162 )
 
 [node name="Left_leg" type="Sprite" parent="turn/Body_parts"]
 
+editor/display_folded = true
 transform/pos = Vector2( -20.2504, 77.3853 )
 transform/rot = -2.48169
 transform/scale = Vector2( 0.115, 0.12375 )
@@ -1670,17 +1692,59 @@ offset = Vector2( -91.9893, -870.752 )
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/base = SubResource( 3 )
-anims/fall = SubResource( 4 )
-anims/heavy_attack = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/light_attack = SubResource( 8 )
-anims/running = SubResource( 9 )
-anims/taunt = SubResource( 10 )
+anims/base = SubResource( 2 )
+anims/fall = SubResource( 3 )
+anims/heavy_attack = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/jump = SubResource( 6 )
+anims/light_attack = SubResource( 7 )
+anims/running = SubResource( 8 )
+anims/taunt = SubResource( 9 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
+
+[node name="a1" type="Area2D" parent="turn"]
+
+transform/pos = Vector2( 236.761, -237.817 )
+input/pickable = true
+shapes/0/shape = SubResource( 10 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -8.98119, 8.98117 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision/layers = 0
+collision/mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="turn/a1"]
+
+transform/pos = Vector2( -8.98119, 8.98117 )
+shape = SubResource( 10 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Action_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="Move_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="Wait_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
 
 
