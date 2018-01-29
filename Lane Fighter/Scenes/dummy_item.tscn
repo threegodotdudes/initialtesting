@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 50.0
+radius = 100.0
 
 [sub_resource type="Animation" id=2]
 
@@ -68,11 +68,7 @@ tracks/1/keys = {
 script/script = ExtResource( 1 )
 power_up_amount = 1.1
 
-[node name="Sprite" type="Sprite" parent="."]
-
-texture = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="Sprite"]
+[node name="Area2D" type="Area2D" parent="."]
 
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
@@ -85,11 +81,16 @@ angular_damp = 1.0
 collision/layers = 0
 collision/mask = 1025
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
